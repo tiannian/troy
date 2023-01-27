@@ -1,6 +1,6 @@
 # Troy
 
-> Troy is a tool like clash. It work on router is best choice
+> Troy is a tool like clash. The best way is working on router.
 
 ## Usage
 
