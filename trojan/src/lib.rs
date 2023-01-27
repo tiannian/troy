@@ -7,8 +7,9 @@ pub use error::*;
 mod trojan;
 pub use trojan::*;
 
-mod config;
-pub use config::*;
+pub mod config;
+#[doc(inline)]
+pub use config::Config;
 
 mod protocol;
 pub use protocol::*;

@@ -10,6 +10,9 @@ pub enum Error {
 
     #[error("Unexpect Address Type")]
     UnexpectAddressType,
+
+    #[error("Domain name resolve failed")]
+    DomainResolveFailed,
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
