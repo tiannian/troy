@@ -36,7 +36,7 @@ pub async fn recv_handshake(stream: &mut (impl AsyncRead + Unpin)) -> Result<Vec
 
     let methods_len = stream.read_u8().await?;
     let mut methods = vec![0u8; methods_len as usize];
-    stream.read(&mut methods).await?;
+    stream.read_buf(&mut methods).await?;
 
     let mut res = Vec::with_capacity(methods_len as usize);
     for m in methods {

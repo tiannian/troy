@@ -9,11 +9,11 @@ pub async fn recv_password(
 
     let ulen = stream.read_u8().await?;
     let mut username = vec![0u8; ulen as usize];
-    stream.read(&mut username).await?;
+    stream.read_buf(&mut username).await?;
 
     let plen = stream.read_u8().await?;
     let mut password = vec![0u8; plen as usize];
-    stream.read(&mut password).await?;
+    stream.read_buf(&mut password).await?;
 
     Ok((ver, username, password))
 }

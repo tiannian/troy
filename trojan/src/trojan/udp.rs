@@ -6,14 +6,14 @@ pub async fn recv_udp(stream: &mut (impl AsyncRead + Unpin)) -> Result<Vec<u8>> 
     let atype = stream.read_u8().await?;
     if atype == 0x01 {
         let mut ip = [0u8; 4];
-        stream.read(&mut ip).await?;
+        stream.read_exact(&mut ip).await?;
     } else if atype == 0x03 {
         let length = stream.read_u16().await?;
         let mut domain = vec![0u8; length as usize];
-        stream.read(&mut domain).await?;
+        stream.read_exact(&mut domain).await?;
     } else if atype == 0x04 {
         let mut ip = [0u8; 16];
-        stream.read(&mut ip).await?;
+        stream.read_exact(&mut ip).await?;
     } else {
         return Err(Error::UnexpectAddressType);
     }
@@ -24,7 +24,7 @@ pub async fn recv_udp(stream: &mut (impl AsyncRead + Unpin)) -> Result<Vec<u8>> 
 
     let mut data = vec![0u8; length as usize];
 
-    stream.read(&mut data).await?;
+    stream.read_buf(&mut data).await?;
 
     Ok(data)
 }
@@ -36,10 +36,10 @@ pub async fn send_packet(
     stream: &mut (impl AsyncWrite + Unpin),
 ) -> Result<()> {
     stream.write_u8(dest_addr.to_u8()).await?;
-    stream.write(&dest_addr.to_vec()).await?;
+    stream.write_all(&dest_addr.to_vec()).await?;
     stream.write_u16(dest_port).await?;
     stream.write_u16(data.len() as u16).await?;
-    stream.write(data).await?;
+    stream.write_all(data).await?;
 
     Ok(())
 }

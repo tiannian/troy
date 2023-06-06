@@ -1,6 +1,2 @@
 [workspace]
-members = [
-    "trojan",
-    "socks5",
-    "tun",
-]
+members = ["trojan", "socks5", "tun", "dns"]

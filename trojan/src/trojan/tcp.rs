@@ -10,7 +10,7 @@ pub async fn forward_tcp(
     to: &mut (impl AsyncRead + AsyncWrite + Unpin),
 ) -> Result<()> {
     let buff = build_handshake(Command::Connect, hashed_password, dest_addr, dest_port);
-    to.write(&buff).await?;
+    to.write_all(&buff).await?;
     copy_bidirectional(from, to).await?;
 
     Ok(())

@@ -1,13 +1,13 @@
 use tun::AsyncDevice;
 
-use crate::Result;
+/* use crate::Result; */
 
 pub struct Tun {
     tun: AsyncDevice,
 }
 
 impl Tun {
-    pub fn new(config: Config) -> Result<Self> {
+    /*     pub fn new(config: Config) -> Result<Self> {
         let tun = {
             let mut config = tun::configure();
 
@@ -15,5 +15,5 @@ impl Tun {
         };
 
         Ok(Self { tun })
-    }
+    } */
 }
