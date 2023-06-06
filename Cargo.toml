@@ -2,4 +2,5 @@
 members = [
     "trojan",
     "socks5",
+    "tun",
 ]
